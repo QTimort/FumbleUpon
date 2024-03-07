@@ -4,7 +4,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="p-4 text-zinc-400">
       <div className="mx-auto max-w-6xl px-4">
-        <div className="text-center text-sm">
+        <div className="text-center text-sm flex  flex-col sm:flex-row gap-2 sm:gap-4 justify-center">
           <p>
             A{" "}
             <a
@@ -36,7 +36,10 @@ const Footer: React.FC = () => {
             className="font-bold text-zinc-200 underline underline-offset-4"
           >
             @Seb_Moriarty
-          </a> - Logo made by <a className={"text-zinc-200e"}>Kuya</a>
+          </a>
+          </p>
+          <p>
+            Logo made by <a className={"text-zinc-200e"}>Kuya</a>
           </p>
         </div>
       </div>
