@@ -3,7 +3,7 @@ import Image from "next/image"
 import { siteConfig } from "@/config/site"
 import Footer from "@/components/footer"
 import { ModeToggle } from "@/components/mode-toggle"
-import WebsiteEmbedder from "@/components/WebsiteEmbedder"
+import RandomWebsiteButton from "@/components/random-website-button"
 
 export default function Home() {
   return (
@@ -24,7 +24,7 @@ export default function Home() {
             {siteConfig.description}
           </p>
           <div className="flex flex-wrap justify-center gap-4 sm:gap-2">
-            <WebsiteEmbedder />
+            <RandomWebsiteButton />
             <ModeToggle />
           </div>
         </div>

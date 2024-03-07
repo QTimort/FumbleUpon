@@ -18,7 +18,7 @@ async function getNewSite(): Promise<{ url?: string; error?: string }> {
   }
 }
 
-const WebsiteEmbedder = () => {
+const RandomWebsiteButton = () => {
   const [count, setCount] = useState<undefined | number>()
 
   const openNewWindow = (url: string) => {
@@ -57,4 +57,4 @@ const WebsiteEmbedder = () => {
     </div>
   )
 }
-export default WebsiteEmbedder
+export default RandomWebsiteButton
