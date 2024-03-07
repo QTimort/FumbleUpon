@@ -19,7 +19,6 @@ ecosystemFiles.forEach((file) => {
   ecosystems[file] = require(`../../../../public/ecosystem/${file}.json`)
 })
 
-
 export async function GET(req: NextRequest) {
   const dapps = getDappsFromEcosystems(ecosystems)
   const url = getRandomItemFromArray(dapps)

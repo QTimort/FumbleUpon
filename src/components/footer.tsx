@@ -4,7 +4,7 @@ const Footer: React.FC = () => {
   return (
     <footer className="p-4 text-zinc-400">
       <div className="mx-auto max-w-6xl px-4">
-        <div className="text-center text-sm flex  flex-col sm:flex-row gap-2 sm:gap-4 justify-center">
+        <div className="flex flex-col justify-center  gap-2 text-center text-sm sm:flex-row sm:gap-4">
           <p>
             A{" "}
             <a
@@ -29,22 +29,26 @@ const Footer: React.FC = () => {
             </a>
           </p>
           <p>
-            Idea by <a
-            href="https://twitter.com/Seb_Moriarty"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-zinc-200 underline underline-offset-4"
-          >
-            @Seb_Moriarty
-          </a>
+            Idea by{" "}
+            <a
+              href="https://twitter.com/Seb_Moriarty"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-zinc-200 underline underline-offset-4"
+            >
+              @Seb_Moriarty
+            </a>
           </p>
           <p>
-            Logo made by <a
-            href="https://twitter.com/PatisPapi"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-bold text-zinc-200 underline underline-offset-4"
-          >@PatisPapi (Kuya)</a>
+            Logo made by{" "}
+            <a
+              href="https://twitter.com/PatisPapi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-zinc-200 underline underline-offset-4"
+            >
+              @PatisPapi (Kuya)
+            </a>
           </p>
         </div>
       </div>
