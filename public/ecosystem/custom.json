@@ -65,5 +65,15 @@
       "portfolio"
     ],
     "url": "https://app.netrunner.tax/"
+  },
+  {
+    "title": "A Beginner’s Guide to Solana",
+    "description": "A Beginner’s Guide to Solana.",
+    "categories": [
+      "tutorial",
+      "documentation",
+      "introduction"
+     ],
+    "url": "https://medium.com/@thesis.investor/a-beginners-guide-to-solana-aa1188159bad"
   }
 ]
