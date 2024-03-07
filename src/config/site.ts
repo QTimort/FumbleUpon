@@ -5,8 +5,7 @@ import { env } from "@/env.mjs"
 export const siteConfig: SiteConfig = {
   name: "FumbleUpon",
   author: "@TimortUnchained",
-  description:
-    "Fumble upon the Solana ecosystem click by click!",
+  description: "Fumble upon the Solana ecosystem click by click!",
   keywords: ["Solana", "Ecosystem"],
   url: {
     base: env.NEXT_PUBLIC_APP_URL,

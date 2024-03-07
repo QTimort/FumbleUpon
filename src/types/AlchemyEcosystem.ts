@@ -1,28 +1,28 @@
 export interface AlchemyEcosystem {
-  data: AlchemyData;
+  data: AlchemyData
 }
 
 export interface AlchemyData {
-  "@context": string;
-  "@graph":   AlchemyGraph[];
+  "@context": string
+  "@graph": AlchemyGraph[]
 }
 
 export interface AlchemyGraph {
-  "@type":          AlchemyGraphType;
-  url?:             string;
-  headline?:        string;
-  "@id":            string;
-  significantLink?: string;
-  relatedLink?:     string[];
-  isPartOf:         AlchemyIsPartOfElement[] | AlchemyPurpleIsPartOf;
-  breadcrumb?:      AlchemyBreadcrumb;
-  reviewedBy?:      AlchemyReviewedBy;
-  inLanguage?:      AlchemyInLanguage;
-  datePublished?:   string;
-  dateModified?:    string;
-  keywords?:        string[];
-  mentions?:        AlchemyReviewedBy[];
-  mainEntity?:      AlchemyMainEntity[];
+  "@type": AlchemyGraphType
+  url?: string
+  headline?: string
+  "@id": string
+  significantLink?: string
+  relatedLink?: string[]
+  isPartOf: AlchemyIsPartOfElement[] | AlchemyPurpleIsPartOf
+  breadcrumb?: AlchemyBreadcrumb
+  reviewedBy?: AlchemyReviewedBy
+  inLanguage?: AlchemyInLanguage
+  datePublished?: string
+  dateModified?: string
+  keywords?: string[]
+  mentions?: AlchemyReviewedBy[]
+  mainEntity?: AlchemyMainEntity[]
 }
 
 export enum AlchemyGraphType {
@@ -31,8 +31,8 @@ export enum AlchemyGraphType {
 }
 
 export interface AlchemyBreadcrumb {
-  "@type":         AlchemyBreadcrumbType;
-  itemListElement: AlchemyItemListElement[];
+  "@type": AlchemyBreadcrumbType
+  itemListElement: AlchemyItemListElement[]
 }
 
 export enum AlchemyBreadcrumbType {
@@ -40,10 +40,10 @@ export enum AlchemyBreadcrumbType {
 }
 
 export interface AlchemyItemListElement {
-  "@type":  AlchemyItemListElementType;
-  position: number;
-  name:     string;
-  item:     string;
+  "@type": AlchemyItemListElementType
+  position: number
+  name: string
+  item: string
 }
 
 export enum AlchemyItemListElementType {
@@ -55,13 +55,13 @@ export enum AlchemyInLanguage {
 }
 
 export interface AlchemyIsPartOfElement {
-  "@type":    AlchemyPurpleType;
-  url:        string;
-  headline?:  AlchemyHeadline;
-  "@id":      string;
-  publisher?: AlchemyPublisher;
-  name?:      string;
-  isPartOf?:  AlchemyReviewedBy;
+  "@type": AlchemyPurpleType
+  url: string
+  headline?: AlchemyHeadline
+  "@id": string
+  publisher?: AlchemyPublisher
+  name?: string
+  isPartOf?: AlchemyReviewedBy
 }
 
 export enum AlchemyPurpleType {
@@ -74,10 +74,10 @@ export enum AlchemyHeadline {
 }
 
 export interface AlchemyReviewedBy {
-  "@type": AlchemyReviewedByType;
-  name:    AlchemyName;
-  url?:    string;
-  "@id":   string;
+  "@type": AlchemyReviewedByType
+  name: AlchemyName
+  url?: string
+  "@id": string
 }
 
 export enum AlchemyReviewedByType {
@@ -116,21 +116,21 @@ export enum AlchemyName {
 }
 
 export interface AlchemyPublisher {
-  "@type": AlchemyReviewedByType;
-  "@id":   string;
+  "@type": AlchemyReviewedByType
+  "@id": string
 }
 
 export interface AlchemyPurpleIsPartOf {
-  "@id": string;
+  "@id": string
 }
 
 export interface AlchemyMainEntity {
-  "@type":         AlchemyMainEntityType;
-  name:            string;
-  acceptedAnswer?: AlchemyAcceptedAnswer;
-  url?:            string;
-  sameAs?:         string;
-  logo?:           AlchemyLogo[];
+  "@type": AlchemyMainEntityType
+  name: string
+  acceptedAnswer?: AlchemyAcceptedAnswer
+  url?: string
+  sameAs?: string
+  logo?: AlchemyLogo[]
 }
 
 export enum AlchemyMainEntityType {
@@ -139,8 +139,8 @@ export enum AlchemyMainEntityType {
 }
 
 export interface AlchemyAcceptedAnswer {
-  "@type": AcceptedAnswerType;
-  text:    string;
+  "@type": AcceptedAnswerType
+  text: string
 }
 
 export enum AcceptedAnswerType {
@@ -148,10 +148,10 @@ export enum AcceptedAnswerType {
 }
 
 export interface AlchemyLogo {
-  "@type":    AlchemyLogoType;
-  name:       string;
-  contentUrl: string;
-  keywords:   string[];
+  "@type": AlchemyLogoType
+  name: string
+  contentUrl: string
+  keywords: string[]
 }
 
 export enum AlchemyLogoType {
