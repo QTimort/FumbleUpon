@@ -51,9 +51,9 @@ yarn format
 - Find the script cmsload.js in @npm/finsweet
 - Locate the line:
 ```js
-        return m && i !== u && (t.originalItemsPerPage = t.itemsPerPage = u),
-        await t.addItems(c, o),
-        m
+return m && i !== u && (t.originalItemsPerPage = t.itemsPerPage = u),
+await t.addItems(c, o),
+m
 ```
 - Put a break point at `m`
 - Refresh the page
@@ -61,31 +61,6 @@ yarn format
 - Then store `t.originalItemsOrder` as global variable
 - Then run the code below:
 ```js
-let convertMapSetToObjArr = (input) => {
-    if (input instanceof Map) {
-        const obj = {};
-        input.forEach((value, key) => {
-            obj[key] = convertMapSetToObjArr(value);
-        });
-        return obj;
-    } else if (input instanceof Set) {
-        const arr = [];
-        input.forEach((value) => {
-            arr.push(convertMapSetToObjArr(value));
-        });
-        return arr;
-    } else if (Array.isArray(input)) {
-        return input.map(convertMapSetToObjArr);
-    } else if (typeof input === 'object' && input !== null) {
-        const obj = {};
-        Object.keys(input).forEach((key) => {
-            obj[key] = convertMapSetToObjArr(input[key]);
-        });
-        return obj;
-    } else {
-        return input;
-    }
-}
 let fetchHTML = async (url) => {
     try {
         const response = await fetch(url);
@@ -117,7 +92,6 @@ let extractJSONFromHTML = (htmlText) => {
     return jsonObjects?.[0];
 }
 let data = Promise.all(temp1.map(d => ({
-    //props: convertMapSetToObjArr(d.props),
     link: d.href,
     isValid: d.valid
 })).map(async (d) => ({
