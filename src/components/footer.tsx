@@ -6,7 +6,7 @@ const Footer: React.FC = () => {
       <div className="mx-auto max-w-6xl px-4">
         <div className="flex flex-col justify-center  gap-2 text-center text-sm sm:flex-row sm:gap-4">
           <p>
-            A{" "}
+            Initiative by{" "}
             <a
               href="https://twitter.com/RadiantsDAO"
               target="_blank"
@@ -14,11 +14,10 @@ const Footer: React.FC = () => {
               className="font-bold text-zinc-200 underline underline-offset-4"
             >
               @RadiantsDAO
-            </a>{" "}
-            initiative
+            </a>
           </p>
           <p>
-            Website made by{" "}
+            Website by{" "}
             <a
               href="https://twitter.com/TimortUnchained"
               target="_blank"
@@ -40,7 +39,7 @@ const Footer: React.FC = () => {
             </a>
           </p>
           <p>
-            Logo made by{" "}
+            Logo by{" "}
             <a
               href="https://twitter.com/PatisPapi"
               target="_blank"
