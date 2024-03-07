@@ -39,7 +39,12 @@ const Footer: React.FC = () => {
           </a>
           </p>
           <p>
-            Logo made by <a className={"text-zinc-200e"}>Kuya</a>
+            Logo made by <a
+            href="https://twitter.com/PatisPapi"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold text-zinc-200 underline underline-offset-4"
+          >@PatisPapi (Kuya)</a>
           </p>
         </div>
       </div>
