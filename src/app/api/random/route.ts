@@ -3,19 +3,12 @@ import { NextRequest, NextResponse } from "next/server"
 import { EcosystemItem } from "@/types/Ecosystems"
 import { getDappsFromEcosystems } from "@/lib/ecosystems"
 
-function generateRandom(seed: number): number {
-  const a = 1664525;
-  const c = 1013904223;
-  const m = 2 ** 32;
-  seed = (a * seed + c) % m;
-  return seed / m;
-}
-
+// tell to not cache this route
+export const revalidate = 0
 
 function getRandomItemFromArray<T>(arr: T[]): T | undefined {
   if (arr.length === 0) return undefined
-  // we dont use Math.random because it output the same result on vercel
-  const randomIndex: number = Math.floor(generateRandom(Date.now()) * arr.length)
+  const randomIndex: number = Math.floor(Math.random() * arr.length)
   return arr[randomIndex]
 }
 
