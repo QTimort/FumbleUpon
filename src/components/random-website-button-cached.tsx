@@ -1,28 +1,10 @@
-// export default RandomWebsiteButton
-// components/RandomWebsiteButton.tsx
-"use client"
-
+// components/RandomWebsiteButtonCache.tsx
 import React, { useCallback, useEffect, useState } from "react"
+import { getNewSite } from "@/utils/getNewSite"
 
 import { Button } from "@/components/ui/button"
 
-async function getNewSite(): Promise<{ url?: string; error?: string }> {
-  try {
-    const response = await fetch("/api/random")
-    const data = await response.json()
-
-    if (!data.url) {
-      return { error: data.error || "An unknown error occurred" }
-    }
-
-    return { url: data.url }
-  } catch (error) {
-    console.error("Failed to check if embedding is allowed:", error)
-    return { error: JSON.stringify(error) || "Unknown error" }
-  }
-}
-
-const RandomWebsiteButton = () => {
+const RandomWebsiteButtonCache = () => {
   const [count, setCount] = useState<undefined | number>()
 
   const openNewWindow = useCallback((url: string) => {
@@ -67,5 +49,4 @@ const RandomWebsiteButton = () => {
     </div>
   )
 }
-
-export default RandomWebsiteButton
+export default RandomWebsiteButtonCache
