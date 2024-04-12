@@ -16,7 +16,15 @@ module.exports = {
         "2xl": "1400px",
       },
     },
+    colors: {
+      'rad-orange': '#FCE184',
+      'rad-white': '#FEF8E2',
+      'rad-black': '#0F0E0C',
+    },
     extend: {
+      fontFamily: {
+        mono: ['var(--font-joystix)'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

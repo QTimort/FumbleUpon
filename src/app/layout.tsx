@@ -2,6 +2,7 @@ import "@/styles/globals.css"
 
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
+import localFont from "next/font/local"
 import { Analytics } from "@vercel/analytics/react"
 
 import { siteConfig } from "@/config/site"
@@ -9,6 +10,11 @@ import { cn } from "@/lib/utils"
 import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
+
+const joyStickFont = localFont({
+  src: './joystix-monospace.woff2',
+  variable: '--font-joystix',
+})
 
 interface RootLayoutProps {
   children: React.ReactNode
@@ -72,7 +78,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body
         className={cn(
           "min-h-screen bg-background antialiased",
-          inter.className
+          joyStickFont.className
         )}
       >
         <ThemeProvider

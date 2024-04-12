@@ -52,6 +52,8 @@ const RandomWebsiteButton = () => {
   return (
     <div>
       <Button
+        variant="rad"
+        className={'uppercase'}
         onClick={goToRandomWebsite}
       >{`FUMBLE UPON${count == null ? "" : " " + count + " Dapps"}`}</Button>
     </div>

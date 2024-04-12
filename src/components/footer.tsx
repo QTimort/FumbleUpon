@@ -1,12 +1,12 @@
-import React from "react"
+import React from "react";
 
 const Footer: React.FC = () => {
   return (
-    <footer className="p-4 text-zinc-400">
-      <div className="mx-auto max-w-6xl px-4">
-        <div className="flex flex-col justify-center  gap-2 text-center text-sm sm:flex-row sm:gap-4">
-          <p>
-            Initiative by{" "}
+    <footer className="p-2 text-rad-white uppercase">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 gap-2 text-center text-sm sm:grid-cols-2 lg:grid-cols-2">
+          <p className={'border border-rad-orange p-1'}>
+            Initiative{" "}
             <a
               href="https://twitter.com/RadiantsDAO"
               target="_blank"
@@ -16,8 +16,8 @@ const Footer: React.FC = () => {
               @RadiantsDAO
             </a>
           </p>
-          <p>
-            Website by{" "}
+          <p className={'border border-rad-orange p-1'}>
+            Website{" "}
             <a
               href="https://twitter.com/TimortUnchained"
               target="_blank"
@@ -27,8 +27,8 @@ const Footer: React.FC = () => {
               @TimortUnchained
             </a>
           </p>
-          <p>
-            Idea by{" "}
+          <p className={'border border-rad-orange p-1'}>
+            Idea{" "}
             <a
               href="https://twitter.com/Seb_Moriarty"
               target="_blank"
@@ -38,8 +38,8 @@ const Footer: React.FC = () => {
               @Seb_Moriarty
             </a>
           </p>
-          <p>
-            Logo by{" "}
+          <p className={'border border-rad-orange p-1'}>
+            Logo{" "}
             <a
               href="https://twitter.com/PatisPapi"
               target="_blank"
@@ -52,7 +52,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
