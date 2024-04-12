@@ -10,7 +10,7 @@ const icons = {
   logo: Command,
   sun: SunMedium,
   moon: Moon,
-  X: X
+  X: X,
 }
 
 export const Icons: IconsType = icons

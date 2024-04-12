@@ -12,8 +12,8 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 const joyStickFont = localFont({
-  src: './joystix-monospace.woff2',
-  variable: '--font-joystix',
+  src: "./joystix-monospace.woff2",
+  variable: "--font-joystix",
 })
 
 interface RootLayoutProps {
