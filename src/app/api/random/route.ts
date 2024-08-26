@@ -19,12 +19,21 @@ ecosystemFiles.forEach((file) => {
   ecosystems[file] = require(`../../../../public/ecosystem/${file}.json`)
 })
 
+function cleanWebsiteName(url: string): string {
+  return url
+    .replace(/^(https?:\/\/)?(www\.)?/, '')
+    .replace(/\/$/, '')
+    .replace(/[^a-zA-Z0-9.-]/g, '_')
+}
+
 export async function GET(req: NextRequest) {
   const dapps = getDappsFromEcosystems(ecosystems)
-  const url = getRandomItemFromArray(dapps)
+  const randomDapp = getRandomItemFromArray(dapps)
 
-  if (url) {
-    return NextResponse.json({ url })
+  if (randomDapp) {
+    const cleanedWebsiteName = cleanWebsiteName(randomDapp)
+    const screenshotUrl = `/screenshots/${cleanedWebsiteName}_screenshot.png`
+    return NextResponse.json({ url: randomDapp, screenshotUrl })
   } else {
     return NextResponse.json({
       error: "Failed to find a URL for the selected ecosystem item",

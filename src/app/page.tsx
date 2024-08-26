@@ -1,11 +1,12 @@
-import Image from "next/image"
+// app/page.tsx
 
+import Image from "next/image"
 import { siteConfig } from "@/config/site"
-import { Button } from "@/components/ui/button"
 import { TextBackground } from "@/components/ui/text-background"
 import TitleWithLines from "@/components/ui/title-with-lines"
 import Footer from "@/components/footer"
 import RandomWebsiteButton from "@/components/random-website-button"
+import {Button} from "@/components/ui/button";
 
 export default function Home() {
   return (
@@ -23,7 +24,7 @@ export default function Home() {
             >
               <div className={"flex w-full justify-center md:w-2/5"}>
                 <Image
-                  src={"/logo.png"}
+                  src={"/logo.svg"}
                   alt={siteConfig.name + " Logo"}
                   width={512}
                   height={512}
@@ -41,7 +42,7 @@ export default function Home() {
                 <p className="max-w-[42rem] uppercase leading-normal text-muted-foreground text-rad-orange sm:text-lg sm:leading-8">
                   {siteConfig.description}
                 </p>
-                <div className="mt-5 flex flex-wrap justify-center gap-4 sm:gap-2">
+                <div className="mt-5 flex flex-wrap justify-center gap-4 sm:gap-2 w-full">
                   <RandomWebsiteButton />
                   <div>
                     <Button variant="rad">
