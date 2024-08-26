@@ -19,14 +19,14 @@ const TitleWithLines: React.FC<TitleWithLinesProps> = ({ title }) => {
         <div className="flex-1 border-t border-rad-orange"></div>
       </div>
 
-      <div className="mx-2 px-2 border-l border-rad-orange">
+      <div className="mx-2 border-l border-rad-orange px-2">
         <a
           href="https://twitter.com/RadiantsDAO"
           target="_blank"
           rel="noopener noreferrer"
           className=""
         >
-          <span className={'text-rad-orange'}>■ </span>follow us
+          <span className={"text-rad-orange"}>■ </span>follow us
         </a>
       </div>
     </div>

@@ -1,41 +1,47 @@
 // app/page.tsx
-'use client';
+"use client"
+
+import React, { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 
 import { siteConfig } from "@/config/site"
 import { TextBackground } from "@/components/ui/text-background"
 import TitleWithLines from "@/components/ui/title-with-lines"
-import React, {useEffect, useState} from "react";
-import DappCard from "@/components/dapp-card";
-import { useRouter } from 'next/navigation';
-import Logo from "@/components/logo";
+import DappCard from "@/components/dapp-card"
+import Logo from "@/components/logo"
 
 interface ExploreComponentProps {
-  dappCount: number;
+  dappCount: number
 }
 
 interface Dapp {
-  url: string;
-  screenshotUrl: string;
-  name: string;
-  height: number;
+  url: string
+  screenshotUrl: string
+  name: string
+  height: number
 }
 
 const Skeleton: React.FC<{ className?: string }> = ({ className }) => (
-  <div className={`animate-pulse bg-gray-300 ${className}`}></div>
-);
+  <div className={`bg-gray-300 animate-pulse ${className}`}></div>
+)
 
-const DappSkeleton: React.FC<{ height: number, bottom: number }> = ({ height, bottom }) => (
-  <div className="absolute left-0 right-0" style={{ height: `${height}px`, bottom: `${bottom}px` }}>
-    <Skeleton className="w-full h-full" />
+const DappSkeleton: React.FC<{ height: number; bottom: number }> = ({
+  height,
+  bottom,
+}) => (
+  <div
+    className="absolute left-0 right-0"
+    style={{ height: `${height}px`, bottom: `${bottom}px` }}
+  >
+    <Skeleton className="h-full w-full" />
   </div>
-);
-
+)
 
 export default function Home() {
-  const [dapps, setDapps] = useState<Dapp[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [dapps, setDapps] = useState<Dapp[]>([])
+  const [loading, setLoading] = useState(true)
   const [count, setCount] = useState<undefined | number>()
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
     fetch("/api/count")
@@ -48,29 +54,33 @@ export default function Home() {
   useEffect(() => {
     const fetchDapps = async () => {
       try {
-        const response = await fetch('/api/random-dapps');
-        const data = await response.json();
-        setDapps(data.dapps.map((dapp: { url: string, screenshotUrl: string }, index: number) => ({
-          ...dapp,
-          name: new URL(dapp.url).hostname.replace('www.', ''),
-          height: [200, 250, 225, 300, 280, 125][index] // Custom heights
-        })));
+        const response = await fetch("/api/random-dapps")
+        const data = await response.json()
+        setDapps(
+          data.dapps.map(
+            (dapp: { url: string; screenshotUrl: string }, index: number) => ({
+              ...dapp,
+              name: new URL(dapp.url).hostname.replace("www.", ""),
+              height: [200, 250, 225, 300, 280, 125][index], // Custom heights
+            })
+          )
+        )
       } catch (error) {
-        console.error('Failed to fetch dapps:', error);
+        console.error("Failed to fetch dapps:", error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchDapps();
-  }, []);
+    fetchDapps()
+  }, [])
 
   const handleFumbleUpon = () => {
-    router.push('/random-dapp');
-  };
+    router.push("/random-dapp")
+  }
 
-  const gridHeight = 333; // Total height of the grid
-  const gap = 16; // Gap between grid items
+  const gridHeight = 333 // Total height of the grid
+  const gap = 16 // Gap between grid items
 
   return (
     <div className="flex h-screen flex-col justify-between">
@@ -87,28 +97,32 @@ export default function Home() {
             >
               <div
                 className={
-                  "flex w-full flex-col items-center justify-center bg-rad-black p-2 py-6 overflow-hidden"
+                  "flex w-full flex-col items-center justify-center overflow-hidden bg-rad-black p-2 py-6"
                 }
               >
-                <div className="bg-black text-white p-8 font-['Joystix', monospace]">
-                  <div className="text-center mb-8">
-                    <h2 className="text-6xl mb-4">EXPLORE SOLANA</h2>
-                    <p className="text-yellow-500 text-xl mb-4">
-                      DISCOVER NEW DAPPS EVERYDAY<br/>
+                <div className="bg-black text-white font-['Joystix', monospace] p-8">
+                  <div className="mb-8 text-center">
+                    <h2 className="mb-4 text-6xl">EXPLORE SOLANA</h2>
+                    <p className="text-yellow-500 mb-4 text-xl">
+                      DISCOVER NEW DAPPS EVERYDAY
+                      <br />
                       ACROSS THE NETWORK
                     </p>
-                    <button className="border border-yellow-500 text-yellow-500 px-6 py-2 border border-rad-orange "
-                            onClick={handleFumbleUpon}>
-                      <div className={'flex justify-center gap-2'}>
-                        <Logo size={24}/>
-                        <p>
-                          FUMBLEUPON {count} DAPPS
-                        </p>
+                    <button
+                      className="border-yellow-500 text-yellow-500 border border border-rad-orange px-6 py-2 "
+                      onClick={handleFumbleUpon}
+                    >
+                      <div className={"flex justify-center gap-2"}>
+                        <Logo size={24} />
+                        <p>FUMBLEUPON {count} DAPPS</p>
                       </div>
                     </button>
                   </div>
 
-                  <div className="relative bottom-[-25%]" style={{height: `${gridHeight}px`}}>
+                  <div
+                    className="relative bottom-[-25%]"
+                    style={{ height: `${gridHeight}px` }}
+                  >
                     {loading ? (
                       <>
                         <DappSkeleton height={250} bottom={100} />
@@ -116,13 +130,14 @@ export default function Home() {
                         <DappSkeleton height={125} bottom={50} />
                         <DappSkeleton height={250} bottom={0} />
                         <DappSkeleton height={250} bottom={0} />
-                        <DappSkeleton height={125} bottom={0}/>
+                        <DappSkeleton height={125} bottom={0} />
                       </>
                     ) : (
                       dapps.map((dapp, index) => {
-                        const column = index % 4;
-                        const row = Math.floor(index / 4);
-                        const bottom = row === 0 ? 0 : dapps[index - 4].height + gap;
+                        const column = index % 4
+                        const row = Math.floor(index / 4)
+                        const bottom =
+                          row === 0 ? 0 : dapps[index - 4].height + gap
 
                         return (
                           <DappCard
@@ -132,11 +147,11 @@ export default function Home() {
                             style={{
                               left: `calc(${column * 25}% + ${gap * column}px)`,
                               bottom: `${bottom}px`,
-                              width: '25%',
+                              width: "25%",
                               height: `${dapp.height}px`,
                             }}
                           />
-                        );
+                        )
                       })
                     )}
                   </div>
@@ -146,7 +161,7 @@ export default function Home() {
           </div>
         </div>
       </main>
-      <TextBackground/>
+      <TextBackground />
     </div>
   )
 }

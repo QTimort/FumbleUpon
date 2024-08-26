@@ -2,9 +2,11 @@
 
 const PlaceholderImage: React.FC<{ className?: string }> = ({ className }) => {
   return (
-    <div className={`flex items-center justify-center bg-gray-200 ${className}`}>
+    <div
+      className={`bg-gray-200 flex items-center justify-center ${className}`}
+    >
       <svg
-        className="h-12 w-12 text-gray-400"
+        className="text-gray-400 h-12 w-12"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"

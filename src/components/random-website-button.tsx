@@ -2,7 +2,8 @@
 
 "use client"
 
-import {useEffect, useState} from "react"
+import { useEffect, useState } from "react"
+
 import { Button } from "@/components/ui/button"
 import WebsiteScreenshot from "@/components/website-screenshot"
 
@@ -51,7 +52,7 @@ const RandomWebsiteButton = () => {
   }, [])
 
   return (
-    <div className="flex flex-col items-center gap-4  w-full">
+    <div className="flex w-full flex-col items-center  gap-4">
       {currentSite ? (
         <WebsiteScreenshot
           key={currentSite.url}

@@ -21,9 +21,9 @@ ecosystemFiles.forEach((file) => {
 
 function cleanWebsiteName(url: string): string {
   return url
-    .replace(/^(https?:\/\/)?(www\.)?/, '')
-    .replace(/\/$/, '')
-    .replace(/[^a-zA-Z0-9.-]/g, '_')
+    .replace(/^(https?:\/\/)?(www\.)?/, "")
+    .replace(/\/$/, "")
+    .replace(/[^a-zA-Z0-9.-]/g, "_")
 }
 
 export async function GET(req: NextRequest) {
