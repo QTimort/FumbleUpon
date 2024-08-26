@@ -1,14 +1,77 @@
 // app/page.tsx
+'use client';
 
-import Image from "next/image"
 import { siteConfig } from "@/config/site"
 import { TextBackground } from "@/components/ui/text-background"
 import TitleWithLines from "@/components/ui/title-with-lines"
-import Footer from "@/components/footer"
-import RandomWebsiteButton from "@/components/random-website-button"
-import {Button} from "@/components/ui/button";
+import React, {useEffect, useState} from "react";
+import DappCard from "@/components/dapp-card";
+import { useRouter } from 'next/navigation';
+import Logo from "@/components/logo";
+
+interface ExploreComponentProps {
+  dappCount: number;
+}
+
+interface Dapp {
+  url: string;
+  screenshotUrl: string;
+  name: string;
+  height: number;
+}
+
+const Skeleton: React.FC<{ className?: string }> = ({ className }) => (
+  <div className={`animate-pulse bg-gray-300 ${className}`}></div>
+);
+
+const DappSkeleton: React.FC<{ height: number, bottom: number }> = ({ height, bottom }) => (
+  <div className="absolute left-0 right-0" style={{ height: `${height}px`, bottom: `${bottom}px` }}>
+    <Skeleton className="w-full h-full" />
+  </div>
+);
+
 
 export default function Home() {
+  const [dapps, setDapps] = useState<Dapp[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [count, setCount] = useState<undefined | number>()
+  const router = useRouter();
+
+  useEffect(() => {
+    fetch("/api/count")
+      .then((r) => r.json())
+      .then((r) => {
+        setCount(r.count)
+      })
+  }, [])
+
+  useEffect(() => {
+    const fetchDapps = async () => {
+      try {
+        const response = await fetch('/api/random-dapps');
+        const data = await response.json();
+        setDapps(data.dapps.map((dapp: { url: string, screenshotUrl: string }, index: number) => ({
+          ...dapp,
+          name: new URL(dapp.url).hostname.replace('www.', ''),
+          height: [200, 250, 225, 300, 280, 125][index] // Custom heights
+        })));
+      } catch (error) {
+        console.error('Failed to fetch dapps:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDapps();
+  }, []);
+
+  const handleFumbleUpon = () => {
+    router.push('/random-dapp');
+  };
+
+  const gridHeight = 333; // Total height of the grid
+  const gap = 16; // Gap between grid items
+
   return (
     <div className="flex h-screen flex-col justify-between">
       <main className="flex flex-grow items-center justify-center">
@@ -22,57 +85,68 @@ export default function Home() {
                 "flex h-auto w-full flex-col border border-rad-orange bg-rad-orange md:flex-row"
               }
             >
-              <div className={"flex w-full justify-center md:w-2/5"}>
-                <Image
-                  src={"/logo.svg"}
-                  alt={siteConfig.name + " Logo"}
-                  width={512}
-                  height={512}
-                  className="p-8 md:p-16"
-                />
-              </div>
               <div
                 className={
-                  "flex w-full flex-col items-center justify-center bg-rad-black p-2 py-6 md:w-3/5"
+                  "flex w-full flex-col items-center justify-center bg-rad-black p-2 py-6 overflow-hidden"
                 }
               >
-                <h1 className="hidden text-4xl font-semibold uppercase text-rad-white sm:block sm:text-4xl md:text-5xl lg:text-6xl">
-                  {siteConfig.name}
-                </h1>
-                <p className="max-w-[42rem] uppercase leading-normal text-muted-foreground text-rad-orange sm:text-lg sm:leading-8">
-                  {siteConfig.description}
-                </p>
-                <div className="mt-5 flex flex-wrap justify-center gap-4 sm:gap-2 w-full">
-                  <RandomWebsiteButton />
-                  <div>
-                    <Button variant="rad">
-                      <svg
-                        className={"h-5 w-5 fill-rad-white"}
-                        xmlns="http://www.w3.org/2000/svg"
-                        shapeRendering="geometricPrecision"
-                        textRendering="geometricPrecision"
-                        imageRendering="optimizeQuality"
-                        fillRule="evenodd"
-                        clipRule="evenodd"
-                        viewBox="0 0 512 462.799"
-                      >
-                        <path
-                          fillRule="nonzero"
-                          d="M403.229 0h78.506L310.219 196.04 512 462.799H354.002L230.261 301.007 88.669 462.799h-78.56l183.455-209.683L0 0h161.999l111.856 147.88L403.229 0zm-27.556 415.805h43.505L138.363 44.527h-46.68l283.99 371.278z"
-                        />
-                      </svg>
-                    </Button>
+                <div className="bg-black text-white p-8 font-['Joystix', monospace]">
+                  <div className="text-center mb-8">
+                    <h2 className="text-6xl mb-4">EXPLORE SOLANA</h2>
+                    <p className="text-yellow-500 text-xl mb-4">
+                      DISCOVER NEW DAPPS EVERYDAY<br/>
+                      ACROSS THE NETWORK
+                    </p>
+                    <button className="border border-yellow-500 text-yellow-500 px-6 py-2 border border-rad-orange "
+                            onClick={handleFumbleUpon}>
+                      <div className={'flex justify-center gap-2'}>
+                        <Logo size={24}/>
+                        <p>
+                          FUMBLEUPON {count} DAPPS
+                        </p>
+                      </div>
+                    </button>
+                  </div>
+
+                  <div className="relative bottom-[-25%]" style={{height: `${gridHeight}px`}}>
+                    {loading ? (
+                      <>
+                        <DappSkeleton height={250} bottom={100} />
+                        <DappSkeleton height={250} bottom={100} />
+                        <DappSkeleton height={125} bottom={50} />
+                        <DappSkeleton height={250} bottom={0} />
+                        <DappSkeleton height={250} bottom={0} />
+                        <DappSkeleton height={125} bottom={0}/>
+                      </>
+                    ) : (
+                      dapps.map((dapp, index) => {
+                        const column = index % 4;
+                        const row = Math.floor(index / 4);
+                        const bottom = row === 0 ? 0 : dapps[index - 4].height + gap;
+
+                        return (
+                          <DappCard
+                            key={index}
+                            dapp={dapp}
+                            className="absolute"
+                            style={{
+                              left: `calc(${column * 25}% + ${gap * column}px)`,
+                              bottom: `${bottom}px`,
+                              width: '25%',
+                              height: `${dapp.height}px`,
+                            }}
+                          />
+                        );
+                      })
+                    )}
                   </div>
                 </div>
               </div>
             </div>
-            <div className={"w-full border border-rad-orange p-1"}>
-              <Footer />
-            </div>
           </div>
         </div>
       </main>
-      <TextBackground />
+      <TextBackground/>
     </div>
   )
 }
