@@ -1,7 +1,8 @@
 "use client"
 
-import React, { useEffect, useState, useCallback, useRef } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+
 import DappPreview from "@/components/dapp-preview"
 import DappPreviewSkeleton from "@/components/dapp-preview-skeleton"
 
@@ -132,7 +133,7 @@ export default function RandomDappContent() {
       fumbleStreak={fumbleStreak}
     />
   ) : (
-    <div className="flex h-[300px] sm:h-[400px] items-center justify-center">
+    <div className="flex h-[300px] items-center justify-center sm:h-[400px]">
       Failed to load dapp
     </div>
   )

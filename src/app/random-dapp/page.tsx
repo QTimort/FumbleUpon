@@ -1,11 +1,12 @@
 "use client"
 
 import React, { Suspense } from "react"
+
+import { siteConfig } from "@/config/site"
 import { TextBackground } from "@/components/ui/text-background"
 import TitleWithLines from "@/components/ui/title-with-lines"
-import { siteConfig } from "@/config/site"
 import DappPreviewSkeleton from "@/components/dapp-preview-skeleton"
-import RandomDappContent from "@/components/random-dapp-content";
+import RandomDappContent from "@/components/random-dapp-content"
 
 export default function RandomDapp() {
   return (

@@ -29,7 +29,6 @@ const DappPreview: React.FC<DappPreviewProps> = ({
   hasPrevious,
   fumbleStreak,
 }) => {
-
   return (
     <div className="bg-black text-white font-['Joystix', monospace] flex flex-col-reverse md:flex-row ">
       <div className="my-4 flex flex-col justify-between px-4 py-0 md:my-0  md:min-h-[500px] md:w-2/5 md:px-6">

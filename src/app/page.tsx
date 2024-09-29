@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/navigation"
 
 import { siteConfig } from "@/config/site"
+import { compareScreenSize, useScreenSize } from "@/hooks/use-screen-size"
 import MasonryGrid from "@/components/ui/masonry-grid"
 import { TextBackground } from "@/components/ui/text-background"
 import TitleWithLines from "@/components/ui/title-with-lines"
@@ -52,8 +53,10 @@ export default function Home() {
   const [loading, setLoading] = useState(true)
   const [count, setCount] = useState<undefined | number>()
   const router = useRouter()
-  const gridHeight = 333 // Total height of the grid
   const itemOffset = 3
+  const screenSize = useScreenSize()
+  const smallerThanMd = compareScreenSize(screenSize, "md") === "smaller"
+
   const handleFumbleUpon = () => {
     router.push("/random-dapp")
   }
@@ -123,12 +126,14 @@ export default function Home() {
             >
               <div
                 className={
-                  "flex w-full flex-col items-center justify-center overflow-hidden bg-rad-black p-2 py-6"
+                  "flex min-h-[80vh] w-full flex-col items-center justify-center overflow-hidden bg-rad-black p-2 py-6 md:min-h-[540px]"
                 }
               >
-                <div className="bg-black text-white font-['Joystix', monospace] p-8">
-                  <div className="text-center">
-                    <h2 className="mb-4 text-6xl">EXPLORE SOLANA</h2>
+                <div className="bg-black text-white font-['Joystix', monospace] relative w-full p-8">
+                  <div className="relative z-10 text-center">
+                    <h2 className="mb-4 text-4xl md:text-6xl">
+                      EXPLORE SOLANA
+                    </h2>
                     <p className="mb-4 text-xl text-rad-orange">
                       DISCOVER NEW DAPPS EVERYDAY
                       <br />
@@ -146,19 +151,25 @@ export default function Home() {
                       </div>
                     </button>
                   </div>
-
                   <div
-                    className="relative bottom-[10%]"
-                    style={{ height: `${gridHeight}px` }}
+                    className={
+                      "relative bottom-[50vh] w-full md:bottom-[-80%] "
+                    }
                   >
-                    <MasonryGrid<MasonryDapps>
-                      items={items}
-                      columnCount={4}
-                      gap={16}
-                      renderItem={(item) => (
-                        <RenderItem item={item} isLoading={loading} />
-                      )}
-                    />
+                    <div
+                      className="absolute -left-14 bottom-0 brightness-[0.2] md:left-auto md:scale-100 md:opacity-100"
+                      style={{ height: `${333}px` }}
+                    >
+                      <MasonryGrid<MasonryDapps>
+                        items={items}
+                        columnWidth={smallerThanMd ? 350 : undefined}
+                        columnCount={smallerThanMd ? 2 : 4}
+                        gap={16}
+                        renderItem={(item) => (
+                          <RenderItem item={item} isLoading={loading} />
+                        )}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

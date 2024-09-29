@@ -11,6 +11,7 @@ interface MasonryGridProps<T extends Item> {
   columnCount?: number
   gap?: number
   renderItem: (item: T) => React.ReactNode
+  columnWidth?: number
 }
 
 function MasonryGrid<T extends Item>({
@@ -18,6 +19,7 @@ function MasonryGrid<T extends Item>({
   columnCount = 4,
   gap = 16,
   renderItem,
+  columnWidth,
 }: MasonryGridProps<T>) {
   const gridRef = useRef<HTMLDivElement>(null)
   const [columns, setColumns] = useState<T[][]>(
@@ -73,7 +75,10 @@ function MasonryGrid<T extends Item>({
         <div
           key={columnIndex}
           className="flex min-w-48 flex-col"
-          style={{ gap: `${gap}px` }}
+          style={{
+            gap: `${gap}px`,
+            width: columnWidth != null ? columnWidth + "px" : "auto",
+          }}
         >
           {column.map((item) => (
             <div key={item.id}>{renderItem(item)}</div>
