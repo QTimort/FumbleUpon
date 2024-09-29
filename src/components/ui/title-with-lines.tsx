@@ -26,7 +26,8 @@ const TitleWithLines: React.FC<TitleWithLinesProps> = ({ title }) => {
           rel="noopener noreferrer"
           className=""
         >
-          <span className={"text-rad-orange"}>■ </span>follow us
+          <span className={"text-center text-rad-orange md:text-left"}>■ </span>
+          follow us
         </a>
       </div>
     </div>

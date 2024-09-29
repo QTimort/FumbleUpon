@@ -5,17 +5,11 @@ import { getDappsFromEcosystems } from "@/lib/ecosystems"
 
 export const revalidate = 0
 
-function getRandomItemFromArray<T>(arr: T[]): T | undefined {
-  if (arr.length === 0) return undefined
-  const randomIndex: number = Math.floor(Math.random() * arr.length)
-  return arr[randomIndex]
-}
-
 const ecosystemFiles = ["alchemy", "cubik", "custom", "dudestoolbox"]
 const ecosystems: Record<string, EcosystemItem[]> = {}
 
 ecosystemFiles.forEach((file) => {
-  ecosystems[file] = require(`../../../../public/ecosystem/${file}.json`)
+  ecosystems[file] = require(`../../../../../public/ecosystem/${file}.json`)
 })
 
 function cleanWebsiteName(url: string): string {
@@ -25,21 +19,27 @@ function cleanWebsiteName(url: string): string {
     .replace(/[^a-zA-Z0-9.-]/g, "_")
 }
 
-export async function GET(req: NextRequest) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: { id: string } }
+) {
   const dapps = getDappsFromEcosystems(ecosystems)
-  const randomDapp = getRandomItemFromArray(dapps)
+  const dapp = dapps.find((d) => cleanWebsiteName(d) === params.id)
 
-  if (randomDapp) {
-    const cleanedWebsiteName = cleanWebsiteName(randomDapp)
+  if (dapp) {
+    const cleanedWebsiteName = cleanWebsiteName(dapp)
     const screenshotUrl = `/screenshots/${cleanedWebsiteName}_screenshot.png`
     return NextResponse.json({
       id: cleanedWebsiteName,
-      url: randomDapp,
+      url: dapp,
       screenshotUrl,
     })
   } else {
-    return NextResponse.json({
-      error: "Failed to find a URL for the selected ecosystem item",
-    })
+    return NextResponse.json(
+      {
+        error: "Failed to find the requested dapp",
+      },
+      { status: 404 }
+    )
   }
 }
