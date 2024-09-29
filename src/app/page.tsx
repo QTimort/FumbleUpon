@@ -157,7 +157,7 @@ export default function Home() {
                     }
                   >
                     <div
-                      className="absolute -left-14 bottom-0 brightness-[0.2] md:left-auto md:scale-100 md:opacity-100"
+                      className="absolute -left-40 sm:-left-12 bottom-0 brightness-[0.2] md:left-auto md:scale-100 md:opacity-100"
                       style={{ height: `${333}px` }}
                     >
                       <MasonryGrid<MasonryDapps>
