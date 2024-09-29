@@ -8,12 +8,12 @@ const Footer: React.FC = () => {
           <p className={"border border-rad-orange p-1"}>
             Initiative{" "}
             <a
-              href="https://twitter.com/RadiantsDAO"
+              href="https://twitter.com/FumbleUpon_"
               target="_blank"
               rel="noopener noreferrer"
               className="text-zinc-200 font-bold underline underline-offset-4"
             >
-              @RadiantsDAO
+              @FumbleUpon_
             </a>
           </p>
           <p className={"border border-rad-orange p-1"}>

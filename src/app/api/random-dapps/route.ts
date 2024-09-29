@@ -28,7 +28,7 @@ function cleanWebsiteName(url: string): string {
 
 export async function GET(req: NextRequest) {
   const dapps = getDappsFromEcosystems(ecosystems)
-  const randomDapps = getRandomItemsFromArray(dapps, 6)
+  const randomDapps = getRandomItemsFromArray(dapps, 7)
 
   const dappsWithScreenshots = randomDapps.map((dapp) => {
     const cleanedWebsiteName = cleanWebsiteName(dapp)

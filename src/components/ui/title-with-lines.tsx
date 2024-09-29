@@ -21,7 +21,7 @@ const TitleWithLines: React.FC<TitleWithLinesProps> = ({ title }) => {
 
       <div className="mx-2 border-l border-rad-orange px-2">
         <a
-          href="https://twitter.com/RadiantsDAO"
+          href="https://twitter.com/FumbleUpon_"
           target="_blank"
           rel="noopener noreferrer"
           className=""

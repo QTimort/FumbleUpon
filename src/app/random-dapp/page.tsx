@@ -76,10 +76,10 @@ export default function RandomDapp() {
             >
               <div
                 className={
-                  "flex w-full flex-col items-center justify-center overflow-hidden bg-rad-black p-2 py-6"
+                  "flex w-full flex-col items-center justify-center overflow-hidden bg-rad-black py-6"
                 }
               >
-                <div className="bg-black text-white font-['Joystix', monospace] w-full p-8">
+                <div className="bg-black text-white font-['Joystix', monospace] w-full">
                   <DappPreview
                     title={dapp.name}
                     description="Discover this amazing Solana dapp!"
