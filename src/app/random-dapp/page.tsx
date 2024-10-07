@@ -15,7 +15,7 @@ export default function RandomDapp() {
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 px-0 text-center sm:px-8">
           <div className="w-full bg-rad-black">
             <div className="border border-rad-orange p-1">
-              <TitleWithLines title={siteConfig.name} />
+              <TitleWithLines link={"/"} title={siteConfig.name} />
             </div>
             <div className="border border-t-0 border-rad-orange bg-rad-orange">
               <div className="bg-rad-black py-0 md:py-6">

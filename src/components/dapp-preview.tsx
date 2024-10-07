@@ -53,8 +53,10 @@ const DappPreview: React.FC<DappPreviewProps> = ({
         </div>
         <div>
           <div className="mb-4 text-left md:mb-6">
-            <h2 className="mb-2 text-xl md:text-2xl">{title}</h2>
-            <p className="text-xs text-rad-orange md:text-sm">{description}</p>
+            <h2 className="mb-2 break-words text-xl md:text-2xl">{title}</h2>
+            <p className="break-words text-xs text-rad-orange md:text-sm">
+              {description}
+            </p>
           </div>
           <div className="space-y-6 md:space-y-4">
             <button

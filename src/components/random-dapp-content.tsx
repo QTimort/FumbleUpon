@@ -4,7 +4,6 @@ import React, { useCallback, useEffect, useRef, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 
 import DappPreview from "@/components/dapp-preview"
-import DappPreviewSkeleton from "@/components/dapp-preview-skeleton"
 
 interface Dapp {
   url: string
@@ -118,7 +117,18 @@ export default function RandomDappContent() {
   }
 
   return loading ? (
-    <DappPreviewSkeleton />
+    <DappPreview
+      title={" "}
+      description="Discover this amazing Solana dapp!"
+      screenshotUrl={"/placeholder.png"}
+      url={"#"}
+      onFumbleAgain={handleFumbleAgain}
+      onPrevious={() => {}}
+      onNext={() => {}}
+      hasPrevious={currentIndex > 0}
+      hasNext={true}
+      fumbleStreak={fumbleStreak}
+    />
   ) : dapp ? (
     <DappPreview
       title={dapp.name}

@@ -117,11 +117,11 @@ export default function Home() {
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 px-4 text-center sm:px-8">
           <div className={"w-full bg-rad-black"}>
             <div className={"w-full border border-rad-orange p-1"}>
-              <TitleWithLines title={siteConfig.name} />
+              <TitleWithLines link={"/"} title={siteConfig.name} />
             </div>
             <div
               className={
-                "flex h-auto w-full flex-col border border-rad-orange bg-rad-orange md:flex-row"
+                "flex h-auto w-full flex-col border border-t-0 border-rad-orange bg-rad-orange md:flex-row"
               }
             >
               <div
@@ -157,7 +157,7 @@ export default function Home() {
                     }
                   >
                     <div
-                      className="absolute -left-40 sm:-left-12 bottom-0 brightness-[0.2] md:left-auto md:scale-100 md:opacity-100"
+                      className="absolute -left-40 bottom-0 brightness-[0.2] sm:-left-12 md:left-auto md:scale-100 md:opacity-100"
                       style={{ height: `${333}px` }}
                     >
                       <MasonryGrid<MasonryDapps>
