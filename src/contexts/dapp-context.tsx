@@ -27,6 +27,7 @@ export interface Dapp {
 interface DappsContextType {
   dapps: Record<string, Dapp>
   getRandomDapps: (n: number) => { randomDapps: Dapp[]; totalDapps: number }
+  getDappByUrl: (url: string) => Dapp | undefined
   isLoading: boolean
   error: string | null
 }
@@ -108,8 +109,12 @@ export const DappsProvider: React.FC<DappsProviderProps> = ({ children }) => {
     return { randomDapps: selectedDapps, totalDapps }
   }
 
+  const getDappByUrl = (url: string): Dapp | undefined => {
+    return Object.values(dapps).find((dapp) => dapp.url === url)
+  }
+
   return (
-    <DappsContext.Provider value={{ dapps, getRandomDapps, isLoading, error }}>
+    <DappsContext.Provider value={{ dapps, getRandomDapps, getDappByUrl, isLoading, error }}>
       {children}
     </DappsContext.Provider>
   )

@@ -7,7 +7,7 @@ import { Dapp, useDapps } from "@/contexts/dapp-context"
 import DappPreview from "@/components/dapp-preview"
 
 export default function RandomDappContent() {
-  const { getRandomDapps, isLoading, error } = useDapps()
+  const { getRandomDapps, getDappByUrl, isLoading, error } = useDapps()
   const [dapp, setDapp] = useState<Dapp | null>(null)
   const [history, setHistory] = useState<Dapp[]>([])
   const [currentIndex, setCurrentIndex] = useState(-1)
@@ -15,6 +15,7 @@ export default function RandomDappContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const hasFetchedRef = useRef(false)
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
 
   const fetchRandomDapp = useCallback(() => {
     const { randomDapps } = getRandomDapps(1)
@@ -39,22 +40,20 @@ export default function RandomDappContent() {
 
   const loadDappFromUrl = useCallback(
     (url: string) => {
-      const { randomDapps } = getRandomDapps(1)
-      const dapp = randomDapps.find((d) => d.url === url)
+      const dapp = getDappByUrl(url)
       if (dapp) {
         setDapp(dapp)
         // Update history if it's a new dapp
         if (!history.some((d) => d.url === url)) {
           setHistory((prev) => [...prev, dapp])
           setCurrentIndex((prev) => prev + 1)
-          setFumbleStreak((prev) => prev + 1)
         }
       } else {
         console.error(`Dapp with URL ${url} not found`)
         fetchRandomDapp()
       }
     },
-    [history, getRandomDapps, fetchRandomDapp]
+    [history, getDappByUrl, fetchRandomDapp]
   )
 
   useEffect(() => {
@@ -70,6 +69,17 @@ export default function RandomDappContent() {
     hasFetchedRef.current = true
   }, [searchParams, loadDappFromUrl, fetchRandomDapp, isLoading])
 
+  useEffect(() => {
+    if (hasFetchedRef.current || isLoading) return
+
+    const urlParam = searchParams.get("url")
+    if (urlParam) {
+      loadDappFromUrl(urlParam)
+    }
+
+    hasFetchedRef.current = true
+  }, [searchParams, loadDappFromUrl, isLoading])
+
   const goBack = useCallback(() => {
     if (currentIndex > 0) {
       setCurrentIndex((prev) => prev - 1)
@@ -80,10 +90,12 @@ export default function RandomDappContent() {
   }, [currentIndex, history, updateQueryParams])
 
   const handleFumbleAgain = () => {
+    setIsInitialLoad(false)
     void fetchRandomDapp()
   }
 
   const handlePrevious = () => {
+    setIsInitialLoad(false)
     if (currentIndex > 0) {
       setCurrentIndex((prev) => prev - 1)
       const prevDapp = history[currentIndex - 1]
@@ -94,6 +106,7 @@ export default function RandomDappContent() {
   }
 
   const handleNext = () => {
+    setIsInitialLoad(false)
     if (currentIndex < history.length - 1) {
       setCurrentIndex((prev) => prev + 1)
       const nextDapp = history[currentIndex + 1]
@@ -127,7 +140,7 @@ export default function RandomDappContent() {
       category={dapp.category}
       productType={dapp.productType}
       screenshotUrl={dapp.preview}
-      url={dapp.url}
+      url={isInitialLoad ? "#" : dapp.url}
       onFumbleAgain={handleFumbleAgain}
       onPrevious={handlePrevious}
       onNext={handleNext}
