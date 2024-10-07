@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useState } from "react"
 import { useRouter } from "next/navigation"
+import { useDapps } from "@/contexts/dapp-context"
 
 import { siteConfig } from "@/config/site"
 import { compareScreenSize, useScreenSize } from "@/hooks/use-screen-size"
@@ -16,10 +17,11 @@ import {
 } from "@/components/mansonry-dapp"
 
 interface Dapp {
+  id: string
   url: string
-  screenshotUrl: string
-  name: string
-  height: number
+  preview: string
+  title: string
+  height?: number
 }
 
 interface RenderItemProps {
@@ -49,9 +51,9 @@ const masonryDapps: MasonryDapps[] = [
 ]
 
 export default function Home() {
-  const [dapps, setDapps] = useState<Dapp[]>([])
-  const [loading, setLoading] = useState(true)
-  const [count, setCount] = useState<undefined | number>()
+  const { getRandomDapps, isLoading, error } = useDapps()
+  const [randomDapps, setRandomDapps] = useState<Dapp[]>([])
+  const [count, setCount] = useState<number>(0)
   const router = useRouter()
   const itemOffset = 3
   const screenSize = useScreenSize()
@@ -61,55 +63,36 @@ export default function Home() {
     router.push("/random-dapp")
   }
 
+  useEffect(() => {
+    if (!isLoading && !error) {
+      const { randomDapps: newRandomDapps, totalDapps } = getRandomDapps(6)
+      setRandomDapps(
+        newRandomDapps.map((dapp, index) => ({
+          ...dapp,
+          height: [200, 250, 225, 300, 280, 125][index], // Custom heights
+        }))
+      )
+      setCount(totalDapps)
+    }
+  }, [isLoading, error]) // Remove getRandomDapps from the dependency array
+
   const items = useMemo(() => {
     const updatedItems = [...masonryDapps]
 
-    dapps.forEach((dapp, index) => {
+    randomDapps.forEach((dapp, index) => {
       if (index + itemOffset < updatedItems.length) {
         updatedItems[index + itemOffset] = {
           ...updatedItems[index + itemOffset],
           url: dapp.url,
-          screenshotUrl: dapp.screenshotUrl,
-          content: dapp.name,
+          screenshotUrl: dapp.preview,
+          content: dapp.title,
           color: "rgba(52,152,219,0)",
         }
       }
     })
 
     return updatedItems
-  }, [dapps])
-
-  useEffect(() => {
-    fetch("/api/count")
-      .then((r) => r.json())
-      .then((r) => {
-        setCount(r.count)
-      })
-  }, [])
-
-  useEffect(() => {
-    const fetchDapps = async () => {
-      try {
-        const response = await fetch("/api/random-dapps")
-        const data = await response.json()
-        setDapps(
-          data.dapps.map(
-            (dapp: { url: string; screenshotUrl: string }, index: number) => ({
-              ...dapp,
-              name: new URL(dapp.url).hostname.replace("www.", ""),
-              height: [200, 250, 225, 300, 280, 125][index], // Custom heights
-            })
-          )
-        )
-      } catch (error) {
-        console.error("Failed to fetch dapps:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchDapps()
-  }, [])
+  }, [randomDapps])
 
   return (
     <div className="flex h-screen flex-col justify-between">
@@ -166,7 +149,7 @@ export default function Home() {
                         columnCount={smallerThanMd ? 2 : 4}
                         gap={16}
                         renderItem={(item) => (
-                          <RenderItem item={item} isLoading={loading} />
+                          <RenderItem item={item} isLoading={isLoading} />
                         )}
                       />
                     </div>

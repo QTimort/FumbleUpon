@@ -44,7 +44,7 @@ const TitleWithLines: React.FC<TitleWithLinesProps> = ({ title, link }) => {
   if (link) {
     return (
       <div className={containerClass}>
-        <Link href={link} className="flex items-center grow">
+        <Link href={link} className="flex grow items-center">
           {Content}
         </Link>
         {FollowUsLink}

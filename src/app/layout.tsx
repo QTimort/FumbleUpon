@@ -3,6 +3,7 @@ import "@/styles/globals.css"
 import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import localFont from "next/font/local"
+import { DappsProvider } from "@/contexts/dapp-context"
 import { Analytics } from "@vercel/analytics/react"
 
 import { siteConfig } from "@/config/site"
@@ -87,7 +88,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <DappsProvider>{children}</DappsProvider>
         </ThemeProvider>
         <Analytics />
       </body>
